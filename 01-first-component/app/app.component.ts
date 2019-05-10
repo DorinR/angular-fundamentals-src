@@ -5,13 +5,24 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
   template: `
     <div class="app">
-      {{ title }}
+      <input 
+        type="text"
+        (input)="handleChange($event.target.value)"
+      >
+    </div>
+    
+    <div *ngIf="name.length >= 2">
+      Searching for ... {{ name }}
     </div>
   `
 })
 export class AppComponent {
-  title: string;
+  name: string;
+  
   constructor() {
-    this.title = 'Ultimate Angular';
+    this.name = '';
+  }
+  handleChange(value: any) {
+    this.name = value;
   }
 }
