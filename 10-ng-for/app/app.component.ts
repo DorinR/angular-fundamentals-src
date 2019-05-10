@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-interface Passenger {
-  id: number,
-  fullname: string,
-  checkedIn: boolean
+interface Passenger{
+  id: number;
+  fullname: string;
+  checkedIn: boolean;
 }
 
 @Component({
@@ -11,20 +11,52 @@ interface Passenger {
   styleUrls: ['app.component.scss'],
   template: `
     <div class="app">
+      
       <h3>Airline Passengers</h3>
       <ul>
-        <template ngFor let-passenger let-i="index" [ngForOf]="passengers">
-          <li>
-            {{ i }}: {{ passenger.fullname }}
-          </li>
-        </template>
-      </ul>
-      <h3>Airline Passengers</h3>
-      <ul>
-        <li *ngFor="let passenger of passengers; let i = index;">
-          {{ i }}: {{ passenger.fullname }}
+        <li *ngFor="let passenger of passengers, let i = index">
+          <span 
+            class="status"
+            [class.checked-in]="passenger.checkedIn"></span>
+          {{ i }}: {{ passenger.fullname }} 
         </li>
       </ul>
+
+      <h3>Airline Passengers 2</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers, let i = index">
+          <span 
+            class="status"
+            [ngClass]="{
+              'checked-in': passenger.checkedIn,
+              'checked-out': !passenger.checkedIn
+            }"></span>
+          {{ i }}: {{ passenger.fullname }} 
+        </li>
+      </ul>
+
+      <h3>Airline Passengers 3</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers, let i = index">
+          <span 
+            class="status"
+            [style.backgroundColor]="(passenger.checkedIn ? '#2ecc71' : '#c0392b')"></span>
+          {{ i }}: {{ passenger.fullname }} 
+        </li>
+      </ul>
+    
+      <h3>Airline Passengers 4</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers, let i = index">
+          <span 
+            class="status"
+            [ngStyle]="{
+              'backgroundColor': (passenger.checkedIn ? '#2ecc71' : '#c0392b')
+            }"></span>
+          {{ i }}: {{ passenger.fullname }} 
+        </li>
+      </ul>
+
     </div>
   `
 })
